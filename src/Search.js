@@ -12,7 +12,7 @@ class Search extends Component {
       this.setState({query: ''})
     } else {
       this.setState({ query: query.trim() })
-      BooksAPI.search(query, 10).then((books) => {
+      BooksAPI.search(query.trim(), 10).then((books) => {
         if (books.error) {books = []}
         this.setState({books})
       })
