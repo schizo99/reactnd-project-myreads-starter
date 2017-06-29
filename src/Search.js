@@ -8,8 +8,15 @@ class Search extends Component {
     books: []
   }
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
-    BooksAPI.search(query, 30).then(books => {this.setState({books})})
+    if (!query) {
+      this.setState({query: ''})
+    } else {
+      this.setState({ query: query.trim() })
+      BooksAPI.search(query, 10).then((books) => {
+        if (books.error) {books = []}
+        this.setState({books})
+      })
+    }
   }
   render () {
       return (
@@ -26,7 +33,7 @@ class Search extends Component {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              <Shelf books={this.state.books.filter(book => book.shelf === "none")}/>
+              <Shelf books={this.state.books}/>
             </ol>
           </div>
         </div>
