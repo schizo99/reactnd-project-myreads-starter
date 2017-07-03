@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Book from './Book'
+import sortBy from 'sort-by'
 
 class Shelf extends Component {
     render () {
@@ -7,8 +8,11 @@ class Shelf extends Component {
         return (
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {books.map((book) => (
-                  <Book key={book.id} book={book}/>
+                {books.sort(sortBy('title')).map((book) => (
+                  <Book 
+                    onMoveBook={this.props.onMoveBook}
+                    key={book.id} book={book}
+                  />
                 ))}
               </ol>
             </div>

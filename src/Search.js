@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Shelf from './Shelf'
+
 class Search extends Component {
   state = {
     query: '',
@@ -13,7 +14,9 @@ class Search extends Component {
     } else {
       this.setState({ query: query.trim() })
       BooksAPI.search(query.trim(), 10).then((books) => {
-        if (books.error) {books = []}
+        if (books.error) {
+          books = []
+        }
         this.setState({books})
       })
     }
@@ -33,7 +36,10 @@ class Search extends Component {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              <Shelf books={this.state.books}/>
+              <Shelf
+                onMoveBook={this.props.onMoveBook} 
+                books={this.state.books}
+              />
             </ol>
           </div>
         </div>
