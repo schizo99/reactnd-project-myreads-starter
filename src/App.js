@@ -11,11 +11,13 @@ class BooksApp extends React.Component {
     books: []
   }
   moveBook = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((data) => {
-      BooksAPI.getAll().then((books) => {
-        this.setState({ books })
+    if (this.state.books) {
+      BooksAPI.update(book, shelf).then((data) => {
+        BooksAPI.getAll().then((books) => {
+          this.setState({ books })
+        })
       })
-    })
+    }
   }
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
@@ -42,10 +44,8 @@ class BooksApp extends React.Component {
           </div>
         )}/>
         <Route path="/search" render={({ history }) => (
-          <Search onMoveBook={(book, shelf) => {
-            this.moveBook(book, shelf)
-            history.push("/")
-            }}/>
+          <Search onMoveBook={this.moveBook}
+          />
         )}/>
       </div>
     )

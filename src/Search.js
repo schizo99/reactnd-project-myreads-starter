@@ -3,18 +3,30 @@ import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 import sortBy from 'sort-by'
+import PropTypes from 'prop-types'
 
 class Search extends Component {
+  
+  static propTypes = {
+    onMoveBook: PropTypes.func.isRequired
+  }
+
   state = {
     query: '',
     books: []
   }
+  
   updateQuery = (query) => {
     if (!query) {
       this.setState({query: ''})
     } else {
       this.setState({ query: query.trim() })
-      BooksAPI.search(query.trim(), 20).then((books) => {
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.query) {
+      BooksAPI.search(this.state.query).then((books) => {
         if (books.error) {
           books = []
         }
@@ -22,7 +34,9 @@ class Search extends Component {
       })
     }
   }
+
   render () {
+      
       return (
         <div className="search-books">
           <div className="search-books-bar">
@@ -40,7 +54,6 @@ class Search extends Component {
               <div className="bookshelf-books">
               <ol className="books-grid">
                 {this.state.books.sort(sortBy('title'))
-                  //.filter(book => book.shelf === "none")
                   .map(book => (
                     <Book 
                       onMoveBook={this.props.onMoveBook}

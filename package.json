@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "prop-types": "^15.5.8",
+    "escape-string-regexp": "^1.0.5",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-headroom": "^2.1.5",
