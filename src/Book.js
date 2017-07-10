@@ -9,7 +9,7 @@ class Book extends Component {
     onMoveBook: PropTypes.func.isRequired
   }
 
-  updateShelf(shelf) {
+  updateBook(shelf) {
     this.props.onMoveBook(this.props.book, shelf)
   }
 
@@ -20,7 +20,7 @@ class Book extends Component {
        <div className="book-top">
          <div className="book-cover" style={{ height: 192, width: 128, backgroundImage: 'url(' + book.imageLinks.smallThumbnail + ')' }}></div>
          <div className="book-shelf-changer">
-           <select defaultValue={book.shelf} onChange={(e) => this.updateShelf(e.target.value)}>
+           <select defaultValue={book.shelf} onChange={(e) => this.updateBook(e.target.value)}>
              <option value="none" disabled>Move to...</option>
              <option value="currentlyReading">Currently Reading</option>
              <option value="wantToRead">Want to Read</option>
