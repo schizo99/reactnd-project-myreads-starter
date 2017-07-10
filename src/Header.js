@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
+import Headroom from 'react-headroom'
 
 class Header extends Component {
     render () {
         return (
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
+          <Headroom>
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+          </Headroom>
         )
     }
 }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-import Shelf from './Shelf'
+import Book from './Book'
+import sortBy from 'sort-by'
 
 class Search extends Component {
   state = {
@@ -13,7 +14,7 @@ class Search extends Component {
       this.setState({query: ''})
     } else {
       this.setState({ query: query.trim() })
-      BooksAPI.search(query.trim(), 10).then((books) => {
+      BooksAPI.search(query.trim(), 20).then((books) => {
         if (books.error) {
           books = []
         }
@@ -36,10 +37,19 @@ class Search extends Component {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-              <Shelf
-                onMoveBook={this.props.onMoveBook} 
-                books={this.state.books}
-              />
+              <div className="bookshelf-books">
+              <ol className="books-grid">
+                {this.state.books.sort(sortBy('title'))
+                  //.filter(book => book.shelf === "none")
+                  .map(book => (
+                    <Book 
+                      onMoveBook={this.props.onMoveBook}
+                      key={book.id} book={book}
+                    />
+                  ))
+                }
+              </ol>
+            </div>
             </ol>
           </div>
         </div>
