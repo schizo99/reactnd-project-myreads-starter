@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 class Search extends Component {
   
   static propTypes = {
+    booksOnShelf: PropTypes.array,
     onMoveBook: PropTypes.func.isRequired
   }
 
@@ -37,7 +38,6 @@ class Search extends Component {
   }
 
   render () {
-      
       return (
         <div className="search-books">
           <div className="search-books-bar">
@@ -58,7 +58,9 @@ class Search extends Component {
                   .map(book => (
                     <Book 
                       onMoveBook={this.props.onMoveBook}
-                      key={book.id} book={book}
+                      key={book.id}
+                      book={book}
+                      booksOnShelf={this.props.booksOnShelf}
                     />
                   ))
                 }

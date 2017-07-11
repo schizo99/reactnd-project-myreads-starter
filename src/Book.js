@@ -6,6 +6,7 @@ class Book extends Component {
   
   static propTypes = {
     book: PropTypes.object.isRequired,
+    booksOnShelf: PropTypes.array,
     onMoveBook: PropTypes.func.isRequired
   }
 
@@ -14,14 +15,19 @@ class Book extends Component {
   }
 
   render () {
-    const {book} = this.props
+    const {book, booksOnShelf} = this.props
+    if (booksOnShelf) {
+      booksOnShelf.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)
+    }
+ 
     return (
       <div className="book">
        <div className="book-top">
-         <div className="book-cover" style={{ height: 192, width: 128, backgroundImage: 'url(' + book.imageLinks.smallThumbnail + ')' }}></div>
+         <div className="book-cover" style={{ height: 192, width: 128, backgroundImage: `url(${book.imageLinks !== undefined ? book.imageLinks.thumbnail: ''})` }}></div>
+         <div className="book-shelf">{book.shelf !== 'none' && book.shelf}</div>
          <div className="book-shelf-changer">
-           <select defaultValue={book.shelf} onChange={(e) => this.updateBook(e.target.value)}>
-             <option value="none" disabled>Move to...</option>
+           <select value={book.shelf} onChange={(e) => this.updateBook(e.target.value)}>
+             <option value="" disabled>Move to...</option>
              <option value="currentlyReading">Currently Reading</option>
              <option value="wantToRead">Want to Read</option>
              <option value="read">Read</option>

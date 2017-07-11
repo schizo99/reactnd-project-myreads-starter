@@ -162,7 +162,15 @@ body, .app {
 }
 
 /* book cover */
-
+.book-shelf {
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 128px;
+  background: #60ac5d;
+  color: white;
+  font-size: 0.8em;
+}
 .book-cover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;

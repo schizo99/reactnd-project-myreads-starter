@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 class Bookshelf extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired,
+    booksOnShelf: PropTypes.array.isRequired,
     onMoveBook: PropTypes.func.isRequired
   }
 
@@ -17,12 +17,13 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">Currently Reading</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {this.props.books.sort(sortBy('title'))
+                {this.props.booksOnShelf.sort(sortBy('title'))
                   .filter(book => book.shelf === "currentlyReading")
                   .map(book => (
                     <Book 
                       onMoveBook={this.props.onMoveBook}
-                      key={book.id} book={book}
+                      key={book.id}
+                      book={book}
                     />
                   ))
                 }
@@ -35,12 +36,13 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {this.props.books.sort(sortBy('title'))
+                {this.props.booksOnShelf.sort(sortBy('title'))
                   .filter(book => book.shelf === "wantToRead")
                   .map(book => (
                     <Book 
                       onMoveBook={this.props.onMoveBook}
-                      key={book.id} book={book}
+                      key={book.id}
+                      book={book}
                     />
                   ))
                 }
@@ -53,12 +55,13 @@ class Bookshelf extends Component {
             <h2 className="bookshelf-title">Read</h2>
              <div className="bookshelf-books">
               <ol className="books-grid">
-                {this.props.books.sort(sortBy('title'))
+                {this.props.booksOnShelf.sort(sortBy('title'))
                   .filter(book => book.shelf === "read")
                   .map(book => (
                     <Book 
                       onMoveBook={this.props.onMoveBook}
-                      key={book.id} book={book}
+                      key={book.id}
+                      book={book}
                     />
                   ))
                 }
