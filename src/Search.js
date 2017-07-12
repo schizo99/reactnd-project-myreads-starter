@@ -31,12 +31,6 @@ class Search extends Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.state.query) {
-      
-    }
-  }
-
   render () {
     return (
       <div className="search-books">
