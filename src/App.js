@@ -12,13 +12,11 @@ class BooksApp extends React.Component {
   }
   moveBook = (book, shelf) => {
     if (this.state.books) {
-      this.setState((state) => ({
-        books: state.books.filter((b) => b.id !== book.id)
-      }))
-      BooksAPI.update(book, shelf).then((result) => {
-        BooksAPI.get(book.id).then((b) => {
-            this.setState((state) => ({ books: state.books.concat([b]) }))
-        })
+      BooksAPI.update(book,shelf).then(() => {
+        book.shelf = shelf;
+        this.setState(state => ({
+          books: state.books.filter(b => b.id !== book.id).concat([ book ])
+        }))
       })
     }
   }
