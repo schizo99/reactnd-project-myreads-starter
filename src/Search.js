@@ -26,6 +26,7 @@ class Search extends Component {
         if (books.error) {
           books = []
         }
+        books.map(book => (this.props.booksOnShelf.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
         this.setState({books})
       })
     }
@@ -54,7 +55,6 @@ class Search extends Component {
                       onMoveBook={this.props.onMoveBook}
                       key={book.id}
                       book={book}
-                      booksOnShelf={this.props.booksOnShelf}
                     />
                   ))
                 }

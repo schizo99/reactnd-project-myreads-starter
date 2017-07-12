@@ -6,7 +6,6 @@ class Book extends Component {
   
   static propTypes = {
     book: PropTypes.object.isRequired,
-    booksOnShelf: PropTypes.array,
     onMoveBook: PropTypes.func.isRequired
   }
 
@@ -15,11 +14,8 @@ class Book extends Component {
   }
 
   render () {
-    const {book, booksOnShelf} = this.props
-    if (booksOnShelf) {
-      booksOnShelf.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)
-    }
- 
+    const {book} = this.props
+    
     return (
       <div className="book">
        <div className="book-top">
