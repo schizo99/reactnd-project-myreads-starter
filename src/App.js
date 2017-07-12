@@ -35,7 +35,9 @@ class BooksApp extends React.Component {
               onMoveBook={this.moveBook}
               booksOnShelf={this.state.books}
             />
-            <Link to="/search">Add a book</Link>
+            <div className="open-search">
+              <Link to="/search">Add a book</Link>
+            </div>
           </div>
         )}/>
         <Route path="/search" render={() => (
